@@ -46,6 +46,10 @@ var pollutionChart = new Chart(ctx, {
 const getValue = () => {
     fetch(location.origin + '/get')
         .then((response) => {
+            if(response.status = 503) {
+                getValue();
+            }
+            else{
                 response.json()
                     .then((data) => {
                         pollutionChart.data.datasets[0].data = data.CO2chartData;
@@ -56,6 +60,7 @@ const getValue = () => {
 
                         getValue();
                     });
+            }
         });
 }
 
