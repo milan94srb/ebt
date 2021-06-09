@@ -49,6 +49,7 @@ app.get('/reset', (req, res) => {
     CO2chartData = [];
     minValue = null;
     maxValue = null;
+    thousandChartData = [];
     res.end();
 });
 
