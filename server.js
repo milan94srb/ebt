@@ -9,7 +9,7 @@ app.use(express.static('public'));
 
 let eventEmitter = new events.EventEmitter();
 
-var CO2chartData = [];
+var CO2chartData = []; //for(let i=0; i<24; i++) { CO2chartData.push(''); }
 var minValue;
 var maxValue;
 var thousandChartData = [];
@@ -43,6 +43,13 @@ app.get('/export', (req, res) => {
     res.json({
         export: thousandChartData
     });
+});
+
+app.get('/reset', (req, res) => {
+    CO2chartData = [];
+    minValue = null;
+    maxValue = null;
+    res.end();
 });
 
 app.listen(process.env.PORT || 3000, () => { console.log('listening on port 3000' )});

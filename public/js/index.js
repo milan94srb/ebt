@@ -18,18 +18,33 @@ var pollutionChart = new Chart(ctx, {
                 label: 'Received signal',
                 data: [],
                 borderColor: 'red',
-                backgroundColor: 'red'
+                backgroundColor: 'red',
+                spanGaps: true,
+                pointRadius: 0
             },
         ]
     },
     options: {
+        normalized: true,
+        animation: false,
         maintainAspectRatio: false,
         scales: {
+            x: {
+                minRotation: 0,
+                maxRotation: 0,
+                ticks: {
+                    sampleSize: 24
+                }
+            },
             y: {
                 beginAtZero: true,
                 max: 3.5,
+                min: 0,
                 steps: 7,
-                stepValue: 0.5
+                stepValue: 0.5,
+                ticks: {
+                    sampleSize: 8
+                }
             }
         }
     }
