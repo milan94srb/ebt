@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+<%- include('partials/navbar') %>
+
+<div class="content">
+    <div class="top">
+        <div class="stats">
+            <%- include('partials/stats') %>
+        </div>
+    </div>
+
+    <div class="pollution-chart-wrapper">
+        <canvas id="pollution-chart"></canvas>
+    </div>
+    
+    <button id="update-button">Update</button>
+</div>
+
+<script src="js/index.js"></script>
+
+<%- include('partials/footer') %>
