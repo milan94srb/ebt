@@ -2,19 +2,11 @@ const updateButton = document.querySelector('#update-button');
 const minValueElement = document.querySelector('#pc-min-value');
 const maxValueElement = document.querySelector('#pc-max-value');
 
-const currentDate = new Date();
-let currentHour = currentDate.getHours();
-
 let chartLabels = [];
 
 for(let i=0; i<24; i++){
-    if(currentHour < 0){ currentHour = 23 };
-    // chartLabels.push(currentHour.toLocaleString('en-US', { minimumIntegerDigits: 2 }) + 'h');
     chartLabels.push('');
-    currentHour--;
 }
-
-chartLabels = chartLabels.reverse();
 
 var ctx = document.getElementById('pollution-chart').getContext('2d');
 var pollutionChart = new Chart(ctx, {
@@ -65,3 +57,23 @@ const getValue = () => {
 }
 
 getValue();
+
+updateButton.addEventListener('click', () => {
+    fetch(location.origin + '/export')
+        .then((response) => {
+            response.json()
+                .then((data) => {
+                    var csv = 'Value,Time\n';
+                    data.export.forEach((row) => {
+                        csv += row.join(',');
+                        csv += '\n';
+                    });
+
+                    var hiddenElement = document.createElement('a');
+                    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+                    hiddenElement.target = '_blank';
+                    hiddenElement.download = 'value.csv';
+                    hiddenElement.click();
+                });
+        });
+});
