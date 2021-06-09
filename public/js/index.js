@@ -46,7 +46,7 @@ var pollutionChart = new Chart(ctx, {
 const getValue = () => {
     fetch(location.origin + '/get')
         .then((response) => {
-            if(response.status = 503) {
+            if(response.status == 503) {
                 getValue();
             }
             else{
